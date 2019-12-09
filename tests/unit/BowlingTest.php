@@ -32,4 +32,21 @@ class BlowlingTest extends TestCase
         $this->game->roll(0);
         $this->assertEquals(16, $this->game->score());
     }
+
+    public function test_a_ten_in_two_frames_is_not_a_spare()
+    {
+        $this->game->roll(3);
+        $this->game->roll(6);
+        $this->game->roll(4);
+        $this->game->roll(2);
+        $this->assertEquals(15, $this->game->score());
+    }
+
+    public function test_a_strike_adds_next_two_balls()
+    {
+        $this->game->roll(10);
+        $this->game->roll(3);
+        $this->game->roll(2);
+        $this->assertEquals(20, $this->game->score());
+    }
 }

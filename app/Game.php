@@ -21,11 +21,18 @@ class Game
     public function score()
     {
         $score = 0;
-        for ($i = 0; $i < 20; $i++) {
-            if ($this->rolled[$i] + $this->rolled[$i + 1] == 10) { // Spare
-                $score += $this->rolled[$i + 2];
+        $thisBall = 0;
+        for ($i = 0; $i < 20; $i += 2) {
+            if ($this->rolled[$thisBall] == 10) { // Strike
+                $score += 10 + $this->rolled[$thisBall + 1] + $this->rolled[$thisBall + 2];
+                $thisBall += 1;
+            } else if ($this->rolled[$thisBall] + $this->rolled[$thisBall + 1] == 10) { // Spare
+                $score += 10 + $this->rolled[$thisBall + 2];
+                $thisBall += 2;
+            } else {
+                $score += $this->rolled[$thisBall] + $this->rolled[$thisBall + 1];
+                $thisBall += 2;
             }
-            $score += $this->rolled[$i];
         }
         return $score;
     }
