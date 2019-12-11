@@ -49,4 +49,12 @@ class BlowlingTest extends TestCase
         $this->game->roll(2);
         $this->assertEquals(20, $this->game->score());
     }
+
+    public function test_perfect_game_score_is_300()
+    {
+        for ($i = 0; $i < 12; $i++) {
+            $this->game->roll(10);
+        }
+        $this->assertEquals(300, $this->game->score());
+    }
 }
